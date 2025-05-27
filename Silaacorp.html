@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organización SILACORP - Cursos de Brigadas de Emergencia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Importación de fuentes de Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap');
+
+        /* Variables CSS para colores (Neutros y Azul) */
+        :root {
+            --color-primary: #007bff; /* Azul corporativo */
+            --color-primary-dark: #0056b3; /* Azul más oscuro para hover */
+            --color-secondary: #ffffff; /* Blanco */
+            --color-text: #343a40; /* Gris oscuro casi negro para texto */
+            --color-background: #f8f9fa; /* Fondo claro */
+            --color-form-bg: #e9ecef; /* Fondo de campos de formulario */
+            --color-border: #ced4da; /* Color de borde */
+            --color-success: #28a745; /* Verde para mensajes de éxito */
+            --color-whatsapp: #25d366; /* Verde WhatsApp */
+            --color-whatsapp-dark: #1da851; /* Verde WhatsApp oscuro para hover */
+            --color-required: #dc3545; /* Rojo para indicar campos obligatorios */
+        }
+
+        /* Estilos generales del cuerpo */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Desplazamiento suave para anclas */
+        }
+
+        /* Estilos del encabezado */
+        header {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative; /* Para posicionar el botón de WhatsApp */
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+        }
+
+        #logo {
+            max-width: 150px; /* Tamaño máximo del logo */
+            height: auto;
+            margin-right: 0; /* Eliminado para reducir espacios */
+            border-radius: 8px; /* Bordes redondeados para el logo */
+            transition: transform 0.3s ease; /* Transición para el logo */
+        }
+
+        #logo:hover {
+            transform: scale(1.05); /* Efecto de escala al pasar el ratón sobre el logo */
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5em; /* Tamaño de fuente grande para el título principal */
+            margin: 0;
+            text-transform: uppercase; /* Texto en mayúsculas */
+            letter-spacing: 2px; /* Espaciado entre letras */
+            font-weight: 900; /* Negrita extra */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra de texto */
+        }
+
+        /* Estilos del contenido principal */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Estilos de las secciones */
+        section {
+            background-color: var(--color-secondary);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px; /* Bordes más redondeados */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más suave y extendida */
+            transition: transform 0.3s ease; /* Transición para las secciones */
+        }
+
+        section:hover {
+            transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-primary);
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--color-primary); /* Línea debajo del título */
+            padding-bottom: 10px;
+            display: inline-block; /* Para que la línea se ajuste al ancho del texto */
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-text);
+            font-size: 1.6em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none; /* Elimina los puntos de la lista por defecto */
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '✓'; /* Icono de checkmark */
+            color: var(--color-primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Estilos del formulario */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* Estilo para el asterisco de campos obligatorios */
+        .form-group label.required::after {
+            content: ' *';
+            color: var(--color-required);
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group input[type="email"],
+        .form-group input[type="file"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px; /* Bordes redondeados */
+            font-size: 1em;
+            background-color: var(--color-form-bg);
+            box-sizing: border-box; /* Incluye padding y border en el ancho total */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+        }
+
+        .form-group input[type="file"] {
+            padding: 10px; /* Ajuste para el input de archivo */
+        }
+
+        .form-group textarea {
+            resize: vertical; /* Permite redimensionar verticalmente */
+            min-height: 90px;
+        }
+
+        /* Estilos de enfoque para campos de formulario */
+        .form-group input[type="text"]:focus,
+        .form-group input[type="date"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="file"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra azul al enfocar */
+            outline: none; /* Elimina el contorno por defecto */
+        }
+
+        /* Estilos de los botones */
+        button {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            padding: 14px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+            margin-right: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para botones */
+        }
+
+        button:hover {
+            background-color: var(--color-primary-dark); /* Color más oscuro al pasar el ratón */
+            transform: translateY(-2px); /* Efecto de elevación */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al pasar el ratón */
+        }
+
+        button:active {
+            transform: translateY(0); /* Vuelve a la posición original al hacer clic */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más suave al hacer clic */
+        }
+
+        /* Estilos del mensaje de éxito */
+        #message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            display: none; /* Oculto por defecto */
+            background-color: var(--color-success);
+            color: var(--color-secondary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos del pie de página */
+        footer {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 40px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Sombra superior */
+        }
+
+        .social-icons a {
+            color: var(--color-secondary);
+            font-size: 1.8em;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: rgba(255, 255, 255, 0.8); /* Un blanco más transparente para hover */
+            transform: scale(1.1); /* Efecto de escala al pasar el ratón */
+        }
+
+        /* Estilos del botón de WhatsApp */
+        #whatsapp-button {
+            background-color: var(--color-whatsapp); /* Verde WhatsApp */
+            padding: 12px 22px;
+            margin-top: 20px;
+            display: inline-flex; /* Permite alinear icono y texto */
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--color-secondary);
+            border-radius: 8px;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #whatsapp-button:hover {
+            background-color: var(--color-whatsapp-dark); /* Verde más oscuro al pasar el ratón */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        #whatsapp-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #whatsapp-button i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            #logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            .header-content {
+                flex-direction: column; /* Apila logo y título en pantallas pequeñas */
+            }
+            button {
+                width: 100%; /* Botones ocupan todo el ancho */
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .social-icons a {
+                font-size: 1.5em;
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            section {
+                padding: 20px;
+            }
+            .form-group label {
+                font-size: 0.9em;
+            }
+            .form-group input, .form-group select, .form-group textarea {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            button {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            #whatsapp-button {
+                font-size: 0.9em;
+                padding: 10px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img id="logo" src="https://github.com/Cheshireguy-25/SILACORP.V2/blob/main/e9addb8c-927a-4712-86a0-a538fddd055e.png?raw=true" alt="Logo Organización SILACORP">
+            <h1>ORGANIZACIÓN SILACORP</h1>
+        </div>
+        <a id="whatsapp-button" href="https://wa.me/5212221234567" target="_blank">
+            <i class="fab fa-whatsapp"></i> Contáctanos por WhatsApp
+        </a>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>Acerca de Organización SILACORP</h2>
+            <p>En **Organización SILACORP**, estamos comprometidos con la seguridad y el desarrollo de capacidades en situaciones de emergencia. Somos líderes en la capacitación de brigadas de emergencia, brindando conocimientos y habilidades esenciales para proteger vidas y bienes.</p>
+
+            <h3>Nuestra Misión</h3>
+            <p>Capacitar a individuos y organizaciones para actuar de manera efectiva y segura ante emergencias, fomentando una cultura de prevención y respuesta proactiva.</p>
+
+            <h3>Nuestra Visión</h3>
+            <p>Ser la institución líder en capacitación de brigadas de emergencia a nivel nacional, reconocida por la excelencia de sus programas, la calidad de sus instructores y el impacto positivo en la seguridad de las comunidades.</p>
+
+            <h3>Nuestros Valores</h3>
+            <ul>
+                <li><strong>Seguridad:</strong> Priorizamos la integridad y bienestar en todas nuestras acciones.</li>
+                <li><strong>Excelencia:</strong> Buscamos la más alta calidad en nuestros cursos y metodologías.</li>
+                <li><strong>Compromiso:</strong> Dedicación total a nuestros alumnos y a la sociedad.</li>
+                <li><strong>Responsabilidad:</strong> Actuamos con ética y profesionalismo en cada capacitación.</li>
+                <li><strong>Innovación:</strong> Actualizamos constantemente nuestros programas para ofrecer las mejores prácticas.</li>
+            </ul>
+        </section>
+
+        <section id="courses">
+            <h2>Nuestros Cursos de Brigadas de Emergencia</h2>
+            <p>Ofrecemos capacitación integral para diferentes escenarios de emergencia. Nuestros cursos están diseñados para brindar conocimientos teóricos y prácticos, preparando a los participantes para enfrentar situaciones críticas con confianza y eficacia.</p>
+            <h3>Objetivo General del Curso</h3>
+            <p>Proporcionar a los participantes los conocimientos, habilidades y herramientas necesarias para organizar, integrar y operar brigadas de emergencia capaces de responder de manera eficiente y coordinada ante cualquier contingencia, minimizando riesgos y salvaguardando vidas.</p>
+
+            <h3>Cursos Disponibles:</h3>
+            <ul>
+                <li>Brigada de Emergencias (Integral)</li>
+                <li>Primeros Auxilios Avanzados</li>
+                <li>Combate Contra Incendios</li>
+                <li>Evacuación y Rescate</li>
+            </ul>
+        </section>
+
+        <section id="inscription">
+            <h2>Formulario de Inscripción al Curso</h2>
+            <form id="inscriptionForm">
+                <div class="form-group">
+                    <label for="nombre" class="required">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaNacimiento" class="required">Fecha de Nacimiento:</label>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="curso" class="required">Selecciona el curso al que te inscribes:</label>
+                    <select id="curso" name="curso" required>
+                        <option value="">-- Selecciona un curso --</option>
+                        <option value="Brigada de Emergencias">Brigada de Emergencias</option>
+                        <option value="Primeros Auxilios">Primeros Auxilios</option>
+                        <option value="Combate Contra Incendios">Combate Contra Incendios</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="modalidad" class="required">Modalidad del curso:</label>
+                    <select id="modalidad" name="modalidad" required>
+                        <option value="">-- Selecciona la modalidad --</option>
+                        <option value="Presencial">Presencial</option>
+                        <option value="Virtual">Virtual</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono" class="required">Teléfono (10 dígitos):</label>
+                    <input type="text" id="telefono" name="telefono" maxlength="10" pattern="[0-9]{10}" title="Por favor, ingresa 10 dígitos numéricos." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="required">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ciudad" class="required">Ciudad:</label>
+                    <input type="text" id="ciudad" name="ciudad" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado" class="required">Estado:</label>
+                    <select id="estado" name="estado" required>
+                        <option value="">-- Selecciona un estado --</option>
+                        <option value="Aguascalientes">Aguascalientes</option>
+                        <option value="Baja California">Baja California</option>
+                        <option value="Baja California Sur">Baja California Sur</option>
+                        <option value="Campeche">Campeche</option>
+                        <option value="Chiapas">Chiapas</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+                        <option value="Colima">Colima</option>
+                        <option value="Ciudad de México">Ciudad de México</option>
+                        <option value="Durango">Durango</option>
+                        <option value="Guanajuato">Guanajuato</option>
+                        <option value="Guerrero">Guerrero</option>
+                        <option value="Hidalgo">Hidalgo</option>
+                        <option value="Jalisco">Jalisco</option>
+                        <option value="México">México</option>
+                        <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
+                        <option value="Morelos">Morelos</option>
+                        <option value="Nayarit">Nayarit</option>
+                        <option value="Nuevo León">Nuevo León</option>
+                        <option value="Oaxaca">Oaxaca</option>
+                        <option value="Puebla">Puebla</option>
+                        <option value="Querétaro">Querétaro</option>
+                        <option value="Quintana Roo">Quintana Roo</option>
+                        <option value="San Luis Potosí">San Luis Potosí</option>
+                        <option value="Sinaloa">Sinaloa</option>
+                        <option value="Sonora">Sonora</option>
+                        <option value="Tabasco">Tabasco</option>
+                        <option value="Tamaulipas">Tamaulipas</option>
+                        <option value="Tlaxcala">Tlaxcala</option>
+                        <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
+                        <option value="Yucatán">Yucatán</option>
+                        <option value="Zacatecas">Zacatecas</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="comentarios">Comentarios:</label>
+                    <textarea id="comentarios" name="comentarios"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="cvFile" class="required">Adjuntar CV (PDF):</label>
+                    <input type="file" id="cvFile" name="cvFile" accept=".pdf" required>
+                </div>
+
+                <button type="submit">Generar Inscripción</button>
+                <button type="button" id="exportPdfButton" style="background-color: var(--color-primary-dark);"><i class="fas fa-file-pdf"></i> Exportar Recibo PDF</button>
+
+                <div id="message" style="display: none;"></div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://facebook.com/silacorp" target="_blank" aria-label="Facebook SILACORP"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com/silacorp" target="_blank" aria-label="Instagram SILACORP"><i class="fab fa-instagram"></i></a>
+            <a href="https://tiktok.com/@silacorp" target="_blank" aria-label="TikTok SILACORP"><i class="fab fa-tiktok"></i></a>
+            <a href="https://linkedin.com/company/silacorp" target="_blank" aria-label="LinkedIn SILACORP"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; 2025 Organización SILACORP. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Obtener referencias a elementos del DOM
+        const inscriptionForm = document.getElementById('inscriptionForm');
+        const messageDiv = document.getElementById('message');
+        const exportPdfButton = document.getElementById('exportPdfButton');
+
+        // Función para limpiar todos los campos del formulario
+        function clearForm() {
+            inscriptionForm.reset(); // Resetea todos los campos del formulario
+        }
+
+        // Event listener para el envío del formulario (botón "Generar Inscripción")
+        inscriptionForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Previene el envío por defecto del formulario (recarga de página)
+
+            // Recopilar los datos del formulario
+            const formData = {
+                nombre: document.getElementById('nombre').value,
+                fechaNacimiento: document.getElementById('fechaNacimiento').value,
+                curso: document.getElementById('curso').value,
+                modalidad: document.getElementById('modalidad').value,
+                telefono: document.getElementById('telefono').value,
+                email: document.getElementById('email').value,
+                ciudad: document.getElementById('ciudad').value,
+                estado: document.getElementById('estado').value,
+                comentarios: document.getElementById('comentarios').value,
+                cvFile: document.getElementById('cvFile').files[0] ? document.getElementById('cvFile').files[0].name : 'No adjuntado'
+            };
+
+            // Simular el guardado de datos (en una aplicación real, aquí se enviaría a un servidor)
+            console.log('Datos de inscripción guardados (simulado):', formData);
+
+            // Mostrar mensaje de éxito al usuario
+            messageDiv.textContent = '¡Te has inscrito correctamente!';
+            messageDiv.style.display = 'block'; // Hacer visible el mensaje
+            messageDiv.style.backgroundColor = 'var(--color-success)'; // Asegurar el color de fondo de éxito
+
+            // Limpiar el formulario y ocultar el mensaje después de 3 segundos
+            setTimeout(() => {
+                clearForm();
+                messageDiv.style.display = 'none'; // Ocultar el mensaje
+            }, 3000);
+        });
+
+        // Event listener para el botón "Exportar Recibo PDF"
+        exportPdfButton.addEventListener('click', function() {
+            // Verificar si la librería jsPDF está cargada
+            if (typeof window.jspdf === 'undefined') {
+                // Usar un mensaje en el DOM en lugar de alert()
+                messageDiv.textContent = 'Error: La librería jsPDF no está cargada. Intenta recargar la página.';
+                messageDiv.style.display = 'block';
+                messageDiv.style.backgroundColor = 'var(--color-primary)'; // Rojo para error
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF(); // Crear una nueva instancia de jsPDF
+
+            // Recopilar los datos actuales del formulario para el PDF
+            const nombre = document.getElementById('nombre').value;
+            const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+            const curso = document.getElementById('curso').value;
+            const modalidad = document.getElementById('modalidad').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const ciudad = document.getElementById('ciudad').value;
+            const estado = document.getElementById('estado').value;
+            const comentarios = document.getElementById('comentarios').value;
+            const cvFileName = document.getElementById('cvFile').files[0] ? document.getElementById('cvFile').files[0].name : 'No adjuntado';
+
+            // Validar que los campos obligatorios estén llenos antes de generar el PDF
+            if (!inscriptionForm.checkValidity()) {
+                // Mostrar un mensaje de error si el formulario no es válido
+                messageDiv.textContent = 'Por favor, completa todos los campos obligatorios del formulario antes de exportar el recibo.';
+                messageDiv.style.display = 'block';
+                messageDiv.style.backgroundColor = 'var(--color-primary)'; // Rojo para error
+                setTimeout(() => { messageDiv.style.display = 'none'; }, 5000); // Ocultar mensaje después de 5 segundos
+                return;
+            }
+
+
+            // Configuración del PDF
+            doc.setFontSize(22);
+            doc.setTextColor(0, 123, 255); // Color azul para el título (var(--color-primary))
+            doc.text("Recibo de Inscripción - SILACORP", 105, 20, null, null, "center"); // Título centrado
+
+            doc.setFontSize(12);
+            doc.setTextColor(52, 58, 64); // Color gris oscuro para texto general (var(--color-text))
+
+            let y = 40; // Posición inicial en Y
+            const lineHeight = 10; // Espaciado entre líneas
+
+            doc.text(`Fecha de Emisión: ${new Date().toLocaleDateString()}`, 20, y);
+            y += lineHeight * 2;
+
+            doc.setFontSize(14);
+            doc.setTextColor(0, 0, 0); // Color negro para subtítulos
+            doc.text("Datos del Inscrito:", 20, y);
+            y += lineHeight;
+
+            doc.setFontSize(12);
+            doc.setTextColor(52, 58, 64); // Color gris oscuro para datos
+            doc.text(`Nombre: ${nombre}`, 20, y);
+            y += lineHeight;
+            doc.text(`Fecha de Nacimiento: ${fechaNacimiento}`, 20, y);
+            y += lineHeight;
+            doc.text(`Teléfono: ${telefono}`, 20, y);
+            y += lineHeight;
+            doc.text(`Email: ${email}`, 20, y);
+            y += lineHeight;
+            doc.text(`Ciudad: ${ciudad}`, 20, y);
+            y += lineHeight;
+            doc.text(`Estado: ${estado}`, 20, y);
+            y += lineHeight * 2;
+
+            doc.setFontSize(14);
+            doc.setTextColor(0, 0, 0);
+            doc.text("Detalles del Curso:", 20, y);
+            y += lineHeight;
+
+            doc.setFontSize(12);
+            doc.setTextColor(52, 58, 64);
+            doc.text(`Curso: ${curso}`, 20, y);
+            y += lineHeight;
+            doc.text(`Modalidad: ${modalidad}`, 20, y);
+            y += lineHeight;
+
+            // Añadir comentarios si existen, con ajuste de línea
+            if (comentarios) {
+                y += lineHeight;
+                doc.setFontSize(14);
+                doc.setTextColor(0, 0, 0);
+                doc.text("Comentarios:", 20, y);
+                y += lineHeight;
+                doc.setFontSize(12);
+                doc.setTextColor(52, 58, 64);
+                // Divide el texto en líneas para que quepa en el ancho de la página
+                const commentsLines = doc.splitTextToSize(comentarios, 170);
+                doc.text(commentsLines, 20, y);
+                y += lineHeight * commentsLines.length;
+            }
+
+            // Añadir información del CV
+            y += lineHeight;
+            doc.setFontSize(14);
+            doc.setTextColor(0, 0, 0);
+            doc.text("CV Adjunto:", 20, y);
+            y += lineHeight;
+            doc.setFontSize(12);
+            doc.setTextColor(52, 58, 64);
+            doc.text(`Archivo: ${cvFileName}`, 20, y);
+            y += lineHeight;
+
+
+            // Pie de página del PDF
+            doc.setFontSize(10);
+            doc.setTextColor(150, 150, 150);
+            doc.text("Este es un recibo generado automáticamente por Organización SILACORP.", 105, doc.internal.pageSize.height - 20, null, null, "center");
+
+            // Guardar el PDF
+            doc.save(`Recibo_Inscripcion_${nombre.replace(/\s/g, '_')}.pdf`);
+        });
+
+        // JavaScript para validar el campo de teléfono: solo números y máximo 10 dígitos
+        document.getElementById('telefono').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
+        });
+
+        // NOTA IMPORTANTE:
+        // Reemplaza 'https://placehold.co/150x150/007bff/ffffff?text=SILACORP+Logo' en la línea 170
+        // con la URL real de tu logo alojado en GitHub (o cualquier otro servicio de alojamiento de imágenes).
+        // Asegúrate de que la URL sea pública y directa a la imagen.
+        // Ejemplo: 'https://raw.githubusercontent.com/tu-usuario/tu-repositorio/main/silacorp-logo.png'
+    </script>
+</body>
+</html>
